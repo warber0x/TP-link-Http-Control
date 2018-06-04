@@ -19,6 +19,7 @@ import hashlib
 login    = 'admin'
 password = 'admin'
 ip       = '192.168.1.7'
+wifi_control = False
 
 ######################################
 # Prepare the cookie for http request#
@@ -72,7 +73,10 @@ control_url = control_url[0:-9]
 # To enable the wifi:  ap=1
 # To disable the wifi: ap=0
 ############################################################
-control_url = control_url + "WlanNetworkRpm_AP.htm?operMode=0&ssid1=Netw0rk&channel=7&mode=6&chanWidth=2&rate=71&addrType=1&ap=1&broadcast=2&Save=Save"
+if wifi_control == True:
+	control_url = control_url + "WlanNetworkRpm_AP.htm?operMode=0&ssid1=Netw0rk&channel=7&mode=6&chanWidth=2&rate=71&addrType=1&ap=1&broadcast=2&Save=Save"
+else:
+	control_url = control_url + "WlanNetworkRpm_AP.htm?operMode=0&ssid1=Netw0rk&channel=7&mode=6&chanWidth=2&rate=71&addrType=1&ap=0&broadcast=2&Save=Save"
 
 if "http://" in control_url:
 	req = urllib2.Request(control_url, None, header_control)
